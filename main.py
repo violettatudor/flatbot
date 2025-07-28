@@ -20,7 +20,10 @@ client = TelegramClient('flatbot_session', api_id, api_hash)
 
 @client.on(events.NewMessage(chats=channels))
 async def handler(event):
-    message = event.message.message or ""
+    message = event.message.message
+    if not message:
+        return  # Пропускаем пустые сообщения
+
     if any(tag in message.lower() for tag in hashtags):
         post_link = f"https://t.me/{event.chat.username}/{event.id}"
         caption = "🏡 Объявление по фильтру:\n{}\n\n{}".format(post_link, message)
