@@ -23,7 +23,7 @@ async def handler(event):
     message = event.message.message or ""
     if any(tag in message.lower() for tag in hashtags):
         post_link = f"https://t.me/{event.chat.username}/{event.id}"
-        caption = "🏡 Объявление по фильтру:\n{}\n\n{}".format(post_link, message)"
+        caption = "🏡 Объявление по фильтру:\n{}\n\n{}".format(post_link, message)
         if event.message.media:
             await client.send_file(your_user_id, file=event.message.media, caption=caption)
         else:
